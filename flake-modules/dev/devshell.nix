@@ -3,11 +3,13 @@
   imports = [ inputs.devshell.flakeModule ];
 
   perSystem =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
-      formatter = pkgs.nixfmt-rfc-style;
-
       devshells.default = {
+        devshell.startup.pre-commit.text = config.pre-commit.installationScript;
+
+        packages = with pkgs; [ convco ];
+
         commands = [
           {
             name = "format";
