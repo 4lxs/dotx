@@ -19,5 +19,9 @@ in
         };
       };
     };
+    darkTheme = mkOption {
+      type = types.bool;
+      description = "use dark theme";
+    };
   };
 }

@@ -12,6 +12,9 @@ with lib;
       name = "FiraCode Nerd Font Mono";
       package = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
     };
-    base16 = libx.base16.mkSchemeAttrs "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+    base16 = mkDefault (
+      libx.base16.mkSchemeAttrs "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml"
+    );
+    darkTheme = mkDefault true;
   };
 }

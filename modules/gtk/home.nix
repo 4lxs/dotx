@@ -1,0 +1,25 @@
+{
+  config,
+  lib,
+  libx,
+  pkgs,
+  ...
+}:
+with lib;
+{
+  options.dotx.gtk.enable = libx.mkEnableTarget "gtk theming";
+
+  config = mkIf config.dotx.gtk.enable {
+    gtk = {
+      enable = true;
+      # inherit (config.dotx.theme) font;
+      theme = {
+        package = pkgs.adw-gtk3;
+        name = if config.dotx.theme.darkTheme then "adw-gtk3-dark" else "adw-gtk3";
+      };
+    };
+    dconf.settings."org/gnome/desktop/interface" = {
+      color-scheme = if config.dotx.theme.darkTheme then "prefer-dark" else "prefer-light";
+    };
+  };
+}

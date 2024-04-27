@@ -16,7 +16,6 @@
       url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
     hyprland.url = "github:hyprwm/Hyprland";
@@ -46,7 +45,7 @@
         };
         homeManagerModules.dotx = {
           imports = [
-            ./dotx/home-manager
+            (import ./dotx/home-manager inputs)
             (import ./lib inputs)
           ];
         };
