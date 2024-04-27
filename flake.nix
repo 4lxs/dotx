@@ -1,5 +1,5 @@
 {
-  description = "hyde configuration flake";
+  description = "dotx configuration flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -20,6 +20,12 @@
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
     hyprland.url = "github:hyprwm/Hyprland";
+
+    base16.url = "github:SenchoPens/base16.nix";
+    base16-kitty = {
+      url = "github:kdrag0n/base16-kitty";
+      flake = false;
+    };
   };
 
   outputs =
@@ -35,10 +41,18 @@
       ];
 
       flake = {
-        nixosModules = import ./modules/nixos;
-        homeManagerModules = import ./modules/home-manager;
-        hydeHomeModules = import ./modules/hyde-home;
-        hydeNixosModules = import ./modules/hyde-nixos;
+        nixosModules.dotx = {
+          imports = [ ./dotx/nixos ];
+        };
+        homeManagerModules.dotx = {
+          imports = [
+            ./dotx/home-manager
+            (import ./lib inputs)
+          ];
+        };
+        nixDarwinModules.dotx = {
+          imports = [ ./dotx/nix-darwin ];
+        };
       };
     };
 }

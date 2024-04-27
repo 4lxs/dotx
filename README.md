@@ -1,3 +1,3 @@
 <!-- TODO -->
 
-# Hyde configuration
+# dotx configuration
