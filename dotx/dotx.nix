@@ -18,9 +18,4 @@ with lib;
       '';
     };
   };
-
-  config.dotx = mkIf config.dotx.autoEnable {
-    kde.enable = true;
-    gtk.enable = true;
-  };
 }

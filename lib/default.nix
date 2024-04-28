@@ -1,5 +1,10 @@
 { base16, ... }@inputs:
-{ pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
 {
   _module.args.libx = {
@@ -8,7 +13,7 @@ with lib;
       mkOption {
         description = "enable target ${name}";
         type = types.bool;
-        default = false;
+        default = config.dotx.autoEnable;
       };
     base16 = pkgs.callPackage base16.lib inputs;
     templates = import ./templates.nix inputs;
