@@ -18,9 +18,11 @@ in
     programs.kitty = {
       enable = true;
 
-      font = {
-        inherit (config.dotx.theme.font) name package;
+      font = with config.dotx.theme.font; {
+        inherit (monospace) name package;
+        size = size.terminal;
       };
+      settings.background_opacity = builtins.toString config.dotx.theme.transparency;
       extraConfig = ''
         include ${theme}
       '';

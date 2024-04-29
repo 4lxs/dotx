@@ -1,0 +1,80 @@
+default partial alphanumeric_keys modifier_keys
+
+xkb_keymap {
+  xkb_keycodes {
+    include "evdev+aliases(qwerty)"
+  };
+
+  xkb_types {
+    include "complete"
+  };
+
+  xkb_compat {
+    include "complete"
+  };
+
+  xkb_symbols {
+    include "pc+si+inet(evdev)"
+
+    name[Group1]="Custom keymap";
+
+    replace key <LALT> { [ Super_L ] };
+    replace key <LWIN> { [ Control_L ] };
+    replace key <LCTL> { [ Alt_L ] };
+    modifier_map Mod1 { <LWIN> };
+    modifier_map Mod4 { <LCTL> };
+    modifier_map Control { <LWIN> };
+
+    include "level3(rwin_switch)"
+    include "capslock(escape_shifted_capslock)"
+
+    key <TLDE> { [ grave, asciitilde, asciitilde ] };
+    // key <AE01> { [ 1 ] };
+    // key <AE02> { [ 2 ] };
+    // key <AE03> { [ 3 ] };
+    // key <AE04> { [ 4 ] };
+    // key <AE05> { [ 5 ] };
+    // key <AE06> { [ 6 ] };
+    // key <AE07> { [ 7 ] };
+    // key <AE08> { [ 8 ] };
+    // key <AE09> { [ 9 ] };
+    // key <AE10> { [ 0 ] };
+    // key <AE11> { [ exclam ] };
+    // key <AE12> { [ question ] };
+    key <AD01> { [ q, Q, 0 ] };
+    key <AD02> { [ w, W, 2 ] };
+    key <AD03> { [ e, E, 4 ] };
+    key <AD04> { [ r, R, 6 ] };
+    key <AD05> { [ t, T, 8 ] };
+    key <AD06> { [ z, Z, zcaron, Zcaron ] };
+    key <AD07> { [ u, U ] };
+    key <AD08> { [ i, I, bar ] };
+    key <AD09> { [ o, O, at ] };
+    key <AD10> { [ p, P, percent ] };
+    key <AD11> { [ parenleft, braceleft, scaron, Scaron ] };
+    key <AD12> { [ parenright, braceright ] };
+    key <AC01> { [ a, A, 1 ] };
+    key <AC02> { [ s, S, 3 ] };
+    key <AC03> { [ d, D, 5 ] };
+    key <AC04> { [ f, F, 7 ] };
+    key <AC05> { [ g, G, 9 ] };
+    key <AC06> { [ h, H, asciicircum ] };
+    key <AC07> { [ j, J, exclam ] };
+    key <AC08> { [ k, K, question ] };
+    key <AC09> { [ l, L, underscore ] };
+    key <AC10> { [ semicolon, colon, ccaron, Ccaron ] };
+    key <AC11> { [ apostrophe, quotedbl, zcaron, Zcaron ] };
+    key <BKSL> { [ dollar, EuroSign, sterling ] };
+    key <LSGT> { [ slash, backslash, bar ] };
+    key <AB01> { [ y, Y, less ] };
+    key <AB02> { [ x, X, greater ] };
+    key <AB03> { [ c, C, bracketleft ] };
+    key <AB04> { [ v, V, bracketright ] };
+    key <AB05> { [ b, B ] };
+    key <AB06> { [ n, N, numbersign ] };
+    key <AB07> { [ m, M, asterisk ] };
+    key <AB08> { [ minus, plus ] };
+    key <AB09> { [ period, comma ] };
+    key <AB10> { [ equal, ampersand ] };
+  };
+};

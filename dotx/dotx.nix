@@ -8,14 +8,7 @@ with lib;
 {
   imports = [
     ./theme
-    ./system
+    ./configuration
   ];
-  options.dotx = {
-    autoEnable = mkOption {
-      type = types.bool;
-      description = ''
-        automatically enable relevant modules for your dotx configuration
-      '';
-    };
-  };
+  options.dotx = { };
 }

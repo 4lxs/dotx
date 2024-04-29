@@ -5,6 +5,13 @@
   pkgs,
   ...
 }:
+with lib;
+let
+  notifications-script = pkgs.writers.writePython3Bin "notifications.py" { } (
+    builtins.readFile ./notifications.py
+  );
+  notifications-py = "${notifications-script}/bin/notifications.py";
+in
 {
   options.dotx.waybar.enable = libx.mkEnableTarget "waybar";
 
@@ -109,7 +116,6 @@
             format = "{icon}";
             rotate = 0;
             icon-size = 18;
-            icon-theme = "Tela-circle-dracula";
             spacing = 0;
             tooltip-format = "{title}";
             on-click = "activate";
@@ -290,7 +296,7 @@
             };
             return-type = "json";
             exec-if = "which dunstctl";
-            exec = "notifications.py";
+            exec = notifications-py;
             on-click = "sleep 0.1 && dunstctl history-pop";
             on-click-middle = "dunstctl history-clear";
             on-click-right = "dunstctl close-all";

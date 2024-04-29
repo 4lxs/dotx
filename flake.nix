@@ -19,6 +19,7 @@
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
     hyprland.url = "github:hyprwm/Hyprland";
+    ags.url = "github:Aylur/ags";
 
     base16.url = "github:SenchoPens/base16.nix";
     base16-kitty = {

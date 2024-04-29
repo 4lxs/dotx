@@ -1,4 +1,4 @@
-{ base16, ... }@inputs:
+inputs:
 {
   config,
   pkgs,
@@ -7,15 +7,17 @@
 }:
 with lib;
 {
-  _module.args.libx = {
-    mkEnableTarget =
-      name:
+  _module.args.libx = rec {
+    mkTargetIf =
+      default: description:
       mkOption {
-        description = "enable target ${name}";
         type = types.bool;
-        default = config.dotx.autoEnable;
+        inherit default description;
       };
-    base16 = pkgs.callPackage base16.lib inputs;
+    mkEnableTarget = mkTargetIf false;
+    mkDisableTarget = mkTargetIf true;
+
+    base16 = pkgs.callPackage inputs.base16.lib inputs;
     templates = import ./templates.nix inputs;
   };
 }
