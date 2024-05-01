@@ -298,8 +298,8 @@ in
             exec-if = "which dunstctl";
             exec = notifications-py;
             on-click = "sleep 0.1 && dunstctl history-pop";
-            on-click-middle = "dunstctl history-clear";
-            on-click-right = "dunstctl close-all";
+            on-click-right = "dunstctl history-clear";
+            on-click-middle = "dunstctl close-all";
             interval = 1;
             tooltip = true;
             escape = true;

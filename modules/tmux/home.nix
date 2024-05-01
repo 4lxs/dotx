@@ -13,6 +13,14 @@ in
 {
   options.dotx.tmux.enable = libx.mkEnableTarget "tmux";
 
+  options.dotx.tmux.makeTerminalDefault = mkOption {
+    type = types.bool;
+    description = ''
+      make terminals open tmux by default and add a special no tmux desktop entry
+      for special cases
+    '';
+  };
+
   config = mkIf config.dotx.tmux.enable {
     home.packages = with pkgs; [
       gitmux

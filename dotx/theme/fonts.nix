@@ -26,7 +26,13 @@ in
         description = "font size for gui";
       };
     };
-    normal = mkFontOption ''
+    emoji = mkFontOption ''
+      font used for emoji
+    '';
+    serif = mkFontOption ''
+      not used currently
+    '';
+    sansserif = mkFontOption ''
       font used for most gui text
     '';
     monospace = mkFontOption ''

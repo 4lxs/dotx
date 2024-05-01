@@ -21,10 +21,10 @@ with lib;
       # acpi
     ];
 
-    programs.hyprlock = {
-      enable = true;
-      backgrounds = [ { path = "${./background.png}"; } ];
-    };
+    # programs.hyprlock = {
+    #   enable = true;
+    #   backgrounds = [ { path = "${./background.png}"; } ];
+    # };
 
     services = {
       # udiskie.enable = true;
@@ -34,10 +34,10 @@ with lib;
       network-manager-applet.enable = true;
       syncthing = {
         enable = true;
-        tray = {
-          enable = true;
-          command = "syncthingtray --wait";
-        };
+        # doesn't work currently. no clue why
+        # tray = {
+        #   enable = true;
+        # };
       };
     };
 

@@ -6,10 +6,30 @@
   ...
 }:
 with lib;
+let
+  noTmuxEntry = pkgs.makeDesktopItem {
+    name = "alacritty";
+    desktopName = "Alacritty (no tmux)";
+    exec = "alacritty -e zsh";
+    icon = "Alacritty";
+    terminal = false;
+  };
+in
 {
   options.dotx.alacritty.enable = libx.mkEnableTarget "alacritty terminal emulator";
 
+  options.dotx.alacritty.openTmux = mkOption {
+    type = types.bool;
+    default = config.dotx.tmux.makeTerminalDefault;
+    description = ''
+      make default program tmux and add a desktop entry without tmux for
+      special cases
+    '';
+  };
+
   config = mkIf config.dotx.alacritty.enable {
+    home.packages = if config.dotx.alacritty.openTmux then [ noTmuxEntry ] else [ ];
+
     programs.alacritty = {
       enable = true;
 
@@ -32,7 +52,7 @@ with lib;
         };
 
         cursor.style.shape = "Beam";
-        shell = {
+        shell = mkIf config.dotx.alacritty.openTmux {
           program = "${pkgs.tmux}/bin/tmux";
           args = [
             "new"

@@ -11,7 +11,7 @@ with lib;
   config = mkIf config.dotx.mako.enable {
     services.mako = {
       enable = true;
-      font = with config.dotx.theme.font; normal.name + " " + (toString size.gui);
+      font = with config.dotx.theme.font; sansserif.name + " " + (toString size.gui);
       padding = "15";
       defaultTimeout = 5000;
       borderSize = 2;

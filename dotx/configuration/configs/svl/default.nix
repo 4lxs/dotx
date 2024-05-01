@@ -10,14 +10,19 @@ with lib;
   config = mkIf (config.dotx.config == "svl") {
     dotx = {
       theme = {
-        font = {
-          normal = mkDefault {
+        font = rec {
+          sansserif = mkDefault {
             name = "FiraCode Nerd Font";
             package = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
           };
+          serif = sansserif; # not used currently anyways
           monospace = mkDefault {
             name = "FiraCode Nerd Font Mono";
             package = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
+          };
+          emoji = mkDefault {
+            name = "Noto Color Emoji";
+            package = pkgs.noto-fonts-color-emoji;
           };
           size = {
             terminal = mkDefault 12;
@@ -32,9 +37,13 @@ with lib;
         wallpaper = ./wallpaper.jpg;
       };
 
+      fontconfig.enable = true;
       hyprland.enable = true;
       dunst.enable = true;
-      tmux.enable = true;
+      tmux = {
+        enable = true;
+        makeTerminalDefault = true;
+      };
       kitty.enable = true;
       alacritty.enable = true;
       waybar.enable = true;

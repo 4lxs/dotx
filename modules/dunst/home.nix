@@ -17,7 +17,7 @@ in
       settings = with config.dotx.theme.base16.withHashtag; {
         global = {
           separator_color = base02;
-          font = with config.dotx.theme.font; "${normal.name} ${toString size.gui}";
+          font = with config.dotx.theme.font; "${sansserif.name} ${toString size.gui}";
           mouse_left_click = "do_action, close_current";
         };
 
