@@ -1,3 +1,4 @@
+_inputs:
 {
   config,
   lib,
@@ -6,9 +7,10 @@
 }:
 with lib;
 {
-  options.dotx = {
-    shell-help.enable = libx.mkEnableTarget "shell help aliases";
-    shell-help-git.enable = libx.mkTargetIf config.dotx.shell-help.enable "git help aliases";
+  options.dotx.shell-help = libx.mkTargetOption "helpful shell aliases" // {
+    git = libx.mkBoolOption config.dotx.shell-help.enable ''
+      helpful git aliases
+    '';
   };
 
   config.home.shellAliases = mkMerge [
@@ -41,7 +43,7 @@ with lib;
       # apt = "man nix-env";
       # apt-get = "man nix-env";
     })
-    (mkIf config.dotx.shell-help-git.enable {
+    (mkIf config.dotx.shell-help.git {
       g = "git";
       ga = "git add";
       gs = "git status";

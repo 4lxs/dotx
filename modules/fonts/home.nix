@@ -1,3 +1,4 @@
+_inputs:
 {
   config,
   lib,
@@ -6,7 +7,7 @@
 }:
 with lib;
 {
-  options.dotx.fontconfig.enable = libx.mkEnableTarget "fontconfig";
+  options.dotx.fontconfig = libx.mkTargetOption ''fonts configuration'';
 
   config = mkIf config.dotx.fontconfig.enable {
     # TODO: not useful for nixos as it uses fontconfig.defaultFonts

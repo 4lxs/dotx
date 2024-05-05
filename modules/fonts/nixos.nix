@@ -1,32 +1,28 @@
-{
-  config,
-  lib,
-  libx,
-  ...
-}:
+_inputs:
+{ config, lib, ... }:
 with lib;
 with config.dotx.theme.font;
 {
-  options.dotx.fontconfig.enable = libx.mkEnableTarget "fontconfig";
-  # TODO: console.font
+  options.dotx.fontconfig = libx.mkTargetOption ''
+    font configuration
+  '';
 
-  config.fonts = builtins.trace "yay" (
-    mkIf config.dotx.fontconfig.enable {
-      packages = [
-        emoji.name
-        serif.name
-        sansserif.name
-        monospace.name
-      ];
-      fontconfig = {
-        enable = true;
-        defaultFonts = {
-          emoji = [ emoji.name ];
-          serif = [ serif.name ];
-          sansSerif = [ sansserif.name ];
-          monospace = [ monospace.name ];
-        };
+  # TODO: console.font
+  config.fonts = mkIf config.dotx.fontconfig.enable {
+    packages = [
+      emoji.name
+      serif.name
+      sansserif.name
+      monospace.name
+    ];
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        emoji = [ emoji.name ];
+        serif = [ serif.name ];
+        sansSerif = [ sansserif.name ];
+        monospace = [ monospace.name ];
       };
-    }
-  );
+    };
+  };
 }
