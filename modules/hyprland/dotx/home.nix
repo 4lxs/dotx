@@ -3,10 +3,12 @@ _inputs:
   config,
   lib,
   pkgs,
-  libx,
   ...
 }:
 with lib;
+let
+  libx = config.lib.dotx;
+in
 {
   options.dotx.hyprland = libx.mkTargetOption "hyprland window manager";
 

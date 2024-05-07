@@ -7,7 +7,7 @@ inputs:
 }:
 with lib;
 {
-  _module.args.libx = rec {
+  config.lib.dotx = rec {
     mkBoolOption =
       default: description:
       mkOption {
@@ -16,10 +16,10 @@ with lib;
       };
     mkEnableOption = mkBoolOption false;
     mkDisableOption = mkBoolOption true;
-    mkTargetOptionIf = default: description: { enable = mkBoolOption default description; };
-    mkTargetOption = mkTargetOptionIf false;
+    mkTargetOptionDef = default: description: { enable = mkBoolOption default description; };
+    mkTargetOption = mkTargetOptionDef false;
 
-    mkConfigOption = name: mkTargetOptionIf (config.dotx.config == "${name}");
+    mkConfigOption = name: mkTargetOptionDef (config.dotx.config == "${name}");
 
     base16 = pkgs.callPackage inputs.base16.lib inputs;
     templates = import ./templates.nix inputs;

@@ -1,13 +1,13 @@
 _inputs:
 {
   lib,
-  libx,
   config,
   pkgs,
   ...
 }:
 with lib;
 let
+  libx = config.lib.dotx;
   notifications-script = pkgs.writers.writePython3Bin "notifications.py" { } (
     builtins.readFile ./notifications.py
   );

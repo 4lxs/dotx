@@ -2,11 +2,13 @@ _inputs:
 {
   config,
   lib,
-  libx,
   pkgs,
   ...
 }:
 with lib;
+let
+  libx = config.lib.dotx;
+in
 {
   options.dotx.gtk = libx.mkTargetOption "gtk theming";
 

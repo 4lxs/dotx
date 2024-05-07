@@ -3,9 +3,11 @@ _inputs:
   pkgs,
   lib,
   config,
-  libx,
   ...
 }:
+let
+  libx = config.lib.dotx;
+in
 {
   options.dotx.rofi = libx.mkTargetOption "rofi";
 

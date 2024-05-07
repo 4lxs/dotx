@@ -1,7 +1,15 @@
 _inputs:
 { config, lib, ... }:
 with lib;
-with config.dotx.theme.font;
+let
+  libx = config.lib.dotx;
+  inherit (config.dotx.theme.font)
+    serif
+    sansserif
+    monospace
+    emoji
+    ;
+in
 {
   options.dotx.fontconfig = libx.mkTargetOption ''
     font configuration

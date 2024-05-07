@@ -1,5 +1,8 @@
-{ libx, lib, ... }:
+{ lib, config, ... }:
 with lib;
+let
+  libx = config.lib.dotx;
+in
 {
   options.dotx.theme = {
     # copied from base16.nix

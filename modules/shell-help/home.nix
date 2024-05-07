@@ -1,11 +1,9 @@
 _inputs:
-{
-  config,
-  lib,
-  libx,
-  ...
-}:
+{ config, lib, ... }:
 with lib;
+let
+  libx = config.lib.dotx;
+in
 {
   options.dotx.shell-help = libx.mkTargetOption "helpful shell aliases" // {
     git = libx.mkBoolOption config.dotx.shell-help.enable ''

@@ -1,12 +1,8 @@
 _inputs:
-{
-  config,
-  lib,
-  libx,
-  ...
-}:
+{ config, lib, ... }:
 with lib;
 let
+  libx = config.lib.dotx;
   theme = config.dotx.theme.base16 {
     templateRepo = libx.templates.kitty;
     target = "default-256";

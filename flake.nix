@@ -15,7 +15,13 @@
 
       flake = {
         nixosModules.dotx = {
-          imports = [ ./dotx/nixos ];
+          imports = [
+            (flake-parts.lib.importApply ./lib inputs)
+            ((import ./dotx/importModules.nix inputs) "nixos")
+            ./dotx/dotx.nix
+          ];
+          # TODO: make optional
+          home-manager.sharedModules = [ self.homeManagerModules.dotx ];
         };
         homeManagerModules.dotx = {
           imports = [
@@ -24,9 +30,10 @@
             ./dotx/dotx.nix
           ];
         };
-        nixDarwinModules.dotx = {
-          imports = [ ./dotx/nix-darwin ];
-        };
+        # TODO
+        # nixDarwinModules.dotx = {
+        #   imports = [ ./dotx/nix-darwin ];
+        # };
       };
     };
 
@@ -53,6 +60,7 @@
     ags.url = "github:Aylur/ags";
     matugen.url = "github:InioX/matugen";
     astal.url = "github:Aylur/astal";
+    aylur.url = "github:Aylur/dotfiles";
 
     base16.url = "github:SenchoPens/base16.nix";
     base16-kitty = {

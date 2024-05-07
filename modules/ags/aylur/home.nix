@@ -2,16 +2,19 @@
   astal,
   ags,
   matugen,
+  aylur,
   ...
 }:
 {
   config,
   lib,
-  libx,
   pkgs,
   ...
 }:
 with lib;
+let
+  libx = config.lib.dotx;
+in
 {
   imports = [
     astal.homeManagerModules.default
@@ -31,7 +34,7 @@ with lib;
 
     programs.ags = {
       enable = true;
-      configDir = ./cfg;
+      configDir = aylur + "/ags";
       extraPackages = with pkgs; [ accountsservice ];
     };
 

@@ -2,12 +2,12 @@ _inputs:
 {
   config,
   lib,
-  libx,
   pkgs,
   ...
 }:
 with lib;
 let
+  libx = config.lib.dotx;
   sessionizer = pkgs.writeScriptBin "tmux-sessionizer.sh" (readFile ./sessionizer.sh);
   sessionizer-sh = "${sessionizer}/bin/tmux-sessionizer.sh";
 in

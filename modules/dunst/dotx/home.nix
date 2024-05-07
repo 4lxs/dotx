@@ -1,13 +1,9 @@
 _inputs:
-{
-  config,
-  lib,
-  libx,
-  ...
-}:
+{ config, lib, ... }:
 with lib;
 let
   dunstOpacity = toHexString ((builtins.ceil (config.dotx.theme.transparency * 100)) * 255 / 100);
+  libx = config.lib.dotx;
 in
 {
   options.dotx.dunst = libx.mkTargetOption "dunst notification daemon";

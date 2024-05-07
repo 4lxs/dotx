@@ -2,10 +2,12 @@ _inputs:
 {
   config,
   lib,
-  libx,
   pkgs,
   ...
 }:
+let
+  libx = config.lib.dotx;
+in
 with lib;
 {
   options.dotx.configs.dotx = libx.mkConfigOption "dotx" ''
@@ -52,13 +54,13 @@ with lib;
       kitty.enable = true;
       alacritty.enable = true;
       ags.enable = true;
-      # waybar.enable = true;
       fish.enable = true;
       rofi.enable = true;
       kde.enable = true;
       gtk.enable = true;
       starship.enable = true;
       shell-help.enable = true;
+      kdeconnect.enable = true;
     };
   };
 }

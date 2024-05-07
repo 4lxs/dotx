@@ -2,12 +2,12 @@ _inputs:
 {
   config,
   lib,
-  libx,
   pkgs,
   ...
 }:
 with lib;
 let
+  libx = config.lib.dotx;
   noTmuxEntry = pkgs.makeDesktopItem {
     name = "alacritty";
     desktopName = "Alacritty (no tmux)";

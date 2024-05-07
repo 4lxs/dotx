@@ -1,11 +1,9 @@
 _inputs:
-{
-  config,
-  lib,
-  libx,
-  ...
-}:
+{ config, lib, ... }:
 with lib;
+let
+  libx = config.lib.dotx;
+in
 {
   options.dotx.zathura = libx.mkTargetOption "zathura document viewer";
 
