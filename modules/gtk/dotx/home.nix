@@ -1,15 +1,12 @@
-_inputs:
-{
+_inputs: {
   config,
   lib,
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   libx = config.lib.dotx;
-in
-{
+in {
   options.dotx.gtk = libx.mkTargetOption "gtk theming";
 
   config = mkIf config.dotx.gtk.enable {
@@ -18,7 +15,10 @@ in
       # inherit (config.dotx.theme) font;
       theme = {
         package = pkgs.adw-gtk3;
-        name = if config.dotx.theme.darkTheme then "adw-gtk3-dark" else "adw-gtk3";
+        name =
+          if config.dotx.theme.darkTheme
+          then "adw-gtk3-dark"
+          else "adw-gtk3";
       };
       # iconTheme = {
       #   package = pkgs.gnome.adwaita-icon-theme;
@@ -26,7 +26,10 @@ in
       # };
     };
     dconf.settings."org/gnome/desktop/interface" = {
-      color-scheme = if config.dotx.theme.darkTheme then "prefer-dark" else "prefer-light";
+      color-scheme =
+        if config.dotx.theme.darkTheme
+        then "prefer-dark"
+        else "prefer-light";
     };
   };
 }

@@ -1,6 +1,5 @@
-{ lib, ... }:
-with lib;
-{
+{lib, ...}:
+with lib; {
   imports = [
     ./colors.nix
     ./fonts.nix

@@ -1,16 +1,18 @@
-_inputs:
-{ config, lib, ... }:
-with lib;
-let
+_inputs: {
+  config,
+  lib,
+  ...
+}:
+with lib; let
   libx = config.lib.dotx;
-  inherit (config.dotx.theme.font)
+  inherit
+    (config.dotx.theme.font)
     serif
     sansserif
     monospace
     emoji
     ;
-in
-{
+in {
   options.dotx.fontconfig = libx.mkTargetOption ''
     font configuration
   '';
@@ -26,10 +28,10 @@ in
     fontconfig = {
       enable = true;
       defaultFonts = {
-        emoji = [ emoji.name ];
-        serif = [ serif.name ];
-        sansSerif = [ sansserif.name ];
-        monospace = [ monospace.name ];
+        emoji = [emoji.name];
+        serif = [serif.name];
+        sansSerif = [sansserif.name];
+        monospace = [monospace.name];
       };
     };
   };

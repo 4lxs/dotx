@@ -1,10 +1,11 @@
-_inputs:
-{ config, lib, ... }:
-with lib;
-let
+_inputs: {
+  config,
+  lib,
+  ...
+}:
+with lib; let
   libx = config.lib.dotx;
-in
-{
+in {
   options.dotx.kde = libx.mkTargetOption "kde theming";
 
   config = mkIf config.dotx.kde.enable {
@@ -12,7 +13,10 @@ in
     qt = {
       enable = true;
       platformTheme.name = "adwaita";
-      style.name = if config.dotx.theme.darkTheme then "adwaita-dark" else "adwaita";
+      style.name =
+        if config.dotx.theme.darkTheme
+        then "adwaita-dark"
+        else "adwaita";
     };
   };
 }

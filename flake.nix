@@ -1,10 +1,13 @@
 {
   description = "dotx configuration flake";
 
-  outputs =
-    { self, flake-parts, ... }@inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ ./flake-modules ];
+  outputs = {
+    self,
+    flake-parts,
+    ...
+  } @ inputs:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      imports = [./flake-modules];
 
       systems = [
         "x86_64-linux"
@@ -21,7 +24,7 @@
             ./dotx/dotx.nix
           ];
           # TODO: make optional
-          home-manager.sharedModules = [ self.homeManagerModules.dotx ];
+          home-manager.sharedModules = [self.homeManagerModules.dotx];
         };
         homeManagerModules.dotx = {
           imports = [

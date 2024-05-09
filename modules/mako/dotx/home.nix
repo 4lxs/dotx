@@ -1,10 +1,11 @@
-_inputs:
-{ config, lib, ... }:
-with lib;
-let
+_inputs: {
+  config,
+  lib,
+  ...
+}:
+with lib; let
   libx = config.lib.dotx;
-in
-{
+in {
   options.dotx.mako = libx.mkTargetOption "mako notification daemon";
 
   config = mkIf config.dotx.mako.enable {

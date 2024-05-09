@@ -1,15 +1,18 @@
-_inputs:
-{ config, lib, ... }:
-with lib;
-let
+_inputs: {
+  config,
+  lib,
+  ...
+}:
+with lib; let
   libx = config.lib.dotx;
-in
-{
-  options.dotx.shell-help = libx.mkTargetOption "helpful shell aliases" // {
-    git = libx.mkBoolOption config.dotx.shell-help.enable ''
-      helpful git aliases
-    '';
-  };
+in {
+  options.dotx.shell-help =
+    libx.mkTargetOption "helpful shell aliases"
+    // {
+      git = libx.mkBoolOption config.dotx.shell-help.enable ''
+        helpful git aliases
+      '';
+    };
 
   config.home.shellAliases = mkMerge [
     (mkIf config.dotx.shell-help.enable {

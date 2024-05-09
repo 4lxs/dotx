@@ -4,18 +4,15 @@
   matugen,
   aylur,
   ...
-}:
-{
+}: {
   config,
   lib,
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   libx = config.lib.dotx;
-in
-{
+in {
   imports = [
     astal.homeManagerModules.default
     ags.homeManagerModules.default
@@ -26,16 +23,15 @@ in
   '';
 
   config = mkIf config.dotx.ags.enable {
-
     programs.astal = {
       enable = true;
-      extraPackages = with pkgs; [ libadwaita ];
+      extraPackages = with pkgs; [libadwaita];
     };
 
     programs.ags = {
       enable = true;
       configDir = aylur + "/ags";
-      extraPackages = with pkgs; [ accountsservice ];
+      extraPackages = with pkgs; [accountsservice];
     };
 
     home.packages = with pkgs; [

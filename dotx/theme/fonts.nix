@@ -1,20 +1,16 @@
-{ lib, ... }:
-with lib;
-let
-  mkFontOption =
-    desc:
+{lib, ...}:
+with lib; let
+  mkFontOption = desc:
     mkOption {
-      type =
-        with types;
+      type = with types;
         submodule {
           options = {
-            name = mkOption { type = str; };
-            package = mkOption { type = package; };
+            name = mkOption {type = str;};
+            package = mkOption {type = package;};
           };
         };
     };
-in
-{
+in {
   options.dotx.theme.font = {
     size = {
       terminal = mkOption {

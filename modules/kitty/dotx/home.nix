@@ -1,14 +1,15 @@
-_inputs:
-{ config, lib, ... }:
-with lib;
-let
+_inputs: {
+  config,
+  lib,
+  ...
+}:
+with lib; let
   libx = config.lib.dotx;
   theme = config.dotx.theme.base16 {
     templateRepo = libx.templates.kitty;
     target = "default-256";
   };
-in
-{
+in {
   options.dotx.kitty = libx.mkTargetOption "kitty terminal emulator";
 
   config = mkIf config.dotx.kitty.enable {

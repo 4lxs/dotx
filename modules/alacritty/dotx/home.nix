@@ -1,12 +1,10 @@
-_inputs:
-{
+_inputs: {
   config,
   lib,
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   libx = config.lib.dotx;
   noTmuxEntry = pkgs.makeDesktopItem {
     name = "alacritty";
@@ -15,21 +13,25 @@ let
     icon = "Alacritty";
     terminal = false;
   };
-in
-{
-  options.dotx.alacritty = libx.mkTargetOption "alacritty terminal emulator" // {
-    openTmux = mkOption {
-      type = types.bool;
-      default = config.dotx.tmux.makeTerminalDefault;
-      description = ''
-        make default program tmux and add a desktop entry without tmux for
-        special cases
-      '';
+in {
+  options.dotx.alacritty =
+    libx.mkTargetOption "alacritty terminal emulator"
+    // {
+      openTmux = mkOption {
+        type = types.bool;
+        default = config.dotx.tmux.makeTerminalDefault;
+        description = ''
+          make default program tmux and add a desktop entry without tmux for
+          special cases
+        '';
+      };
     };
-  };
 
   config = mkIf config.dotx.alacritty.enable {
-    home.packages = if config.dotx.alacritty.openTmux then [ noTmuxEntry ] else [ ];
+    home.packages =
+      if config.dotx.alacritty.openTmux
+      then [noTmuxEntry]
+      else [];
 
     programs.alacritty = {
       enable = true;

@@ -1,10 +1,11 @@
-_inputs:
-{ config, lib, ... }:
-with lib;
-let
+_inputs: {
+  config,
+  lib,
+  ...
+}:
+with lib; let
   libx = config.lib.dotx;
-in
-{
+in {
   options.dotx.zathura = libx.mkTargetOption "zathura document viewer";
 
   config = mkIf config.dotx.zathura.enable {
@@ -75,7 +76,7 @@ in
       };
     };
     xdg.mimeApps.defaultApplications = {
-      "application/pdf" = [ "org.pwmt.zathura.desktop" ];
+      "application/pdf" = ["org.pwmt.zathura.desktop"];
     };
   };
 }

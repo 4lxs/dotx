@@ -1,15 +1,12 @@
-_inputs:
-{
+_inputs: {
   config,
   lib,
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   libx = config.lib.dotx;
-in
-{
+in {
   options.dotx.hyprland = libx.mkTargetOption "hyprland window manager";
 
   config = mkIf config.dotx.hyprland.enable {
@@ -49,8 +46,7 @@ in
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
-      extraConfig =
-        with pkgs;
+      extraConfig = with pkgs;
         builtins.readFile (substituteAll {
           src = ./hyprland.conf;
           inherit swaybg;

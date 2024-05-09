@@ -1,26 +1,23 @@
-_inputs:
-{
+_inputs: {
   lib,
   config,
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   libx = config.lib.dotx;
-  notifications-script = pkgs.writers.writePython3Bin "notifications.py" { } (
+  notifications-script = pkgs.writers.writePython3Bin "notifications.py" {} (
     builtins.readFile ./notifications.py
   );
   notifications-py = "${notifications-script}/bin/notifications.py";
-in
-{
+in {
   options.dotx.waybar = libx.mkTargetOption "waybar";
 
   config = mkIf config.dotx.waybar.enable {
-    home.packages = with pkgs; [ playerctl ];
+    home.packages = with pkgs; [playerctl];
     programs.waybar = {
       enable = true;
-      package = pkgs.waybar.override { wireplumberSupport = false; };
+      package = pkgs.waybar.override {wireplumberSupport = false;};
       systemd.enable = true;
       style = ./style.css;
       settings = {
@@ -122,7 +119,7 @@ in
             tooltip-format = "{title}";
             on-click = "activate";
             on-click-middle = "close";
-            ignore-list = [ ];
+            ignore-list = [];
             app_ids-mapping = {
               firefoxdeveloperedition = "firefox-developer-edition";
             };

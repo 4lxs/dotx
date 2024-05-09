@@ -1,26 +1,25 @@
-_inputs:
-{
+_inputs: {
   config,
   lib,
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   libx = config.lib.dotx;
   sessionizer = pkgs.writeScriptBin "tmux-sessionizer.sh" (readFile ./sessionizer.sh);
   sessionizer-sh = "${sessionizer}/bin/tmux-sessionizer.sh";
-in
-{
-  options.dotx.tmux = libx.mkTargetOption "tmux" // {
-    makeTerminalDefault = mkOption {
-      type = types.bool;
-      description = ''
-        make terminals open tmux by default and add a special no tmux desktop entry
-        for special cases
-      '';
+in {
+  options.dotx.tmux =
+    libx.mkTargetOption "tmux"
+    // {
+      makeTerminalDefault = mkOption {
+        type = types.bool;
+        description = ''
+          make terminals open tmux by default and add a special no tmux desktop entry
+          for special cases
+        '';
+      };
     };
-  };
 
   config = mkIf config.dotx.tmux.enable {
     home.packages = with pkgs; [

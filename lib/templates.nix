@@ -1,1 +1,1 @@
-inputs: { kitty = inputs.base16-kitty; }
+inputs: {kitty = inputs.base16-kitty;}

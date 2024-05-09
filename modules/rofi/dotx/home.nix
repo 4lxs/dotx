@@ -1,14 +1,11 @@
-_inputs:
-{
+_inputs: {
   pkgs,
   lib,
   config,
   ...
-}:
-let
+}: let
   libx = config.lib.dotx;
-in
-{
+in {
   options.dotx.rofi = libx.mkTargetOption "rofi";
 
   config = lib.mkIf config.dotx.rofi.enable {

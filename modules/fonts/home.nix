@@ -1,10 +1,11 @@
-_inputs:
-{ config, lib, ... }:
-with lib;
-let
+_inputs: {
+  config,
+  lib,
+  ...
+}:
+with lib; let
   libx = config.lib.dotx;
-in
-{
+in {
   options.dotx.fontconfig = libx.mkTargetOption ''fonts configuration'';
 
   config = mkIf config.dotx.fontconfig.enable {
