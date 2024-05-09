@@ -6,17 +6,18 @@ inputs: {
 } @ args:
 with lib; {
   config.lib.dotx = rec {
-    mkBoolOption = default: description:
-      mkOption {
-        type = types.bool;
-        inherit default description;
-      };
-    mkEnableOption = mkBoolOption false;
-    mkDisableOption = mkBoolOption true;
-    mkTargetOptionDef = default: description: {enable = mkBoolOption default description;};
-    mkTargetOption = mkTargetOptionDef false;
-
-    mkConfigOption = name: mkTargetOptionDef (cfg.config == "${name}");
+    options = rec {
+      mkBool = default: description:
+        mkOption {
+          type = types.bool;
+          inherit default description;
+        };
+      mkEnable = mkBool false;
+      mkDisable = mkBool true;
+      mkTargetDef = default: description: {enable = mkBool default description;};
+      mkTarget = mkTargetDef false;
+      mkConfig = name: mkTargetDef (cfg.config == "${name}");
+    };
 
     base16 = pkgs.callPackage inputs.base16.lib inputs;
     templates = import ./templates.nix inputs;
