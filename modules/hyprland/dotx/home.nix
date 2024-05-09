@@ -7,9 +7,7 @@ _inputs: {
 with lib; let
   libx = config.lib.dotx;
 in {
-  options.dotx.hyprland = libx.mkTargetOption "hyprland window manager";
-
-  config = mkIf config.dotx.hyprland.enable {
+  config = mkIf libx.cfg.hyprland.enable {
     home.packages = with pkgs; [
       brightnessctl
       qt6.qtwayland
@@ -50,7 +48,7 @@ in {
         builtins.readFile (substituteAll {
           src = ./hyprland.conf;
           inherit swaybg;
-          inherit (config.dotx.theme) wallpaper;
+          inherit (libx.cfg.theme) wallpaper;
           polkit = libsForQt5.polkit-kde-agent;
           keymap = "${./keymap.xkb}";
         });

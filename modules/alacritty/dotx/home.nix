@@ -14,22 +14,9 @@ with lib; let
     terminal = false;
   };
 in {
-  options.dotx.alacritty =
-    libx.mkTargetOption "alacritty terminal emulator"
-    // {
-      openTmux = mkOption {
-        type = types.bool;
-        default = config.dotx.tmux.makeTerminalDefault;
-        description = ''
-          make default program tmux and add a desktop entry without tmux for
-          special cases
-        '';
-      };
-    };
-
-  config = mkIf config.dotx.alacritty.enable {
+  config = mkIf libx.cfg.alacritty.enable {
     home.packages =
-      if config.dotx.alacritty.openTmux
+      if libx.cfg.alacritty.openTmux
       then [noTmuxEntry]
       else [];
 
@@ -41,7 +28,7 @@ in {
         # dynamic_title = true;
         env.TERM = "tmux-256color";
 
-        font = with config.dotx.theme.font; {
+        font = with libx.cfg.theme.font; {
           normal = {
             family = monospace.name;
             style = "Regular";
@@ -50,12 +37,12 @@ in {
         };
 
         window = {
-          opacity = config.dotx.theme.transparency;
+          opacity = libx.cfg.theme.transparency;
           dynamic_padding = true;
         };
 
         cursor.style.shape = "Beam";
-        shell = mkIf config.dotx.alacritty.openTmux {
+        shell = mkIf libx.cfg.alacritty.openTmux {
           program = "${pkgs.tmux}/bin/tmux";
           args = [
             "new"
@@ -63,7 +50,7 @@ in {
           ];
         };
 
-        colors = with config.dotx.theme.base16.withHashtag; {
+        colors = with libx.cfg.theme.base16.withHashtag; {
           primary = {
             foreground = base05;
             background = base00;

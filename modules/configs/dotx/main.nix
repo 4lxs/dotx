@@ -7,11 +7,7 @@ _inputs: {
   libx = config.lib.dotx;
 in
   with lib; {
-    options.dotx.configs.dotx = libx.mkConfigOption "dotx" ''
-      the default dotx configuration
-    '';
-
-    config = mkIf config.dotx.configs.dotx.enable {
+    config = mkIf libx.cfg.configs.dotx.enable {
       dotx = {
         theme = {
           font = rec {

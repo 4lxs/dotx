@@ -11,9 +11,7 @@ with lib; let
   );
   notifications-py = "${notifications-script}/bin/notifications.py";
 in {
-  options.dotx.waybar = libx.mkTargetOption "waybar";
-
-  config = mkIf config.dotx.waybar.enable {
+  config = mkIf libx.cfg.waybar.enable {
     home.packages = with pkgs; [playerctl];
     programs.waybar = {
       enable = true;

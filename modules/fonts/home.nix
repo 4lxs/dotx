@@ -6,16 +6,14 @@ _inputs: {
 with lib; let
   libx = config.lib.dotx;
 in {
-  options.dotx.fontconfig = libx.mkTargetOption ''fonts configuration'';
-
-  config = mkIf config.dotx.fontconfig.enable {
+  config = mkIf libx.cfg.fontconfig.enable {
     # TODO: not useful for nixos as it uses fontconfig.defaultFonts
     fonts.fontconfig.enable = true;
     home.packages = [
-      config.dotx.theme.font.serif.package
-      config.dotx.theme.font.sansserif.package
-      config.dotx.theme.font.monospace.package
-      config.dotx.theme.font.emoji.package
+      libx.cfg.theme.font.serif.package
+      libx.cfg.theme.font.sansserif.package
+      libx.cfg.theme.font.monospace.package
+      libx.cfg.theme.font.emoji.package
     ];
   };
 }

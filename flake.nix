@@ -20,16 +20,19 @@
         nixosModules.dotx = {
           imports = [
             (flake-parts.lib.importApply ./lib inputs)
-            ((import ./dotx/importModules.nix inputs) "nixos")
+            ((import ./dotx/importModules.nix true inputs) "nixos")
             ./dotx/dotx.nix
           ];
           # TODO: make optional
-          home-manager.sharedModules = [self.homeManagerModules.dotx];
+          home-manager.sharedModules = [
+            (flake-parts.lib.importApply ./lib inputs)
+            ((import ./dotx/importModules.nix false inputs) "home")
+          ];
         };
         homeManagerModules.dotx = {
           imports = [
             (flake-parts.lib.importApply ./lib inputs)
-            ((import ./dotx/importModules.nix inputs) "home")
+            ((import ./dotx/importModules.nix true inputs) "home")
             ./dotx/dotx.nix
           ];
         };

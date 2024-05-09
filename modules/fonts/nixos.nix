@@ -6,24 +6,20 @@ _inputs: {
 with lib; let
   libx = config.lib.dotx;
   inherit
-    (config.dotx.theme.font)
+    (libx.cfg.theme.font)
     serif
     sansserif
     monospace
     emoji
     ;
 in {
-  options.dotx.fontconfig = libx.mkTargetOption ''
-    font configuration
-  '';
-
   # TODO: console.font
-  config.fonts = mkIf config.dotx.fontconfig.enable {
+  config.fonts = mkIf libx.cfg.fontconfig.enable {
     packages = [
-      emoji.name
-      serif.name
-      sansserif.name
-      monospace.name
+      emoji.package
+      serif.package
+      sansserif.package
+      monospace.package
     ];
     fontconfig = {
       enable = true;

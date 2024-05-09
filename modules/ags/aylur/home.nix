@@ -18,11 +18,7 @@ in {
     ags.homeManagerModules.default
   ];
 
-  options.dotx.ags = libx.mkTargetOption ''
-    ags widgets from [aylur's dotfiles](https://github.com/Aylur/dotfiles/tree/main)
-  '';
-
-  config = mkIf config.dotx.ags.enable {
+  config = mkIf libx.cfg.ags.enable {
     programs.astal = {
       enable = true;
       extraPackages = with pkgs; [libadwaita];

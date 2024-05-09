@@ -4,18 +4,16 @@ _inputs: {
   ...
 }:
 with lib; let
-  dunstOpacity = toHexString ((builtins.ceil (config.dotx.theme.transparency * 100)) * 255 / 100);
+  dunstOpacity = toHexString ((builtins.ceil (libx.cfg.theme.transparency * 100)) * 255 / 100);
   libx = config.lib.dotx;
 in {
-  options.dotx.dunst = libx.mkTargetOption "dunst notification daemon";
-
-  config = mkIf config.dotx.dunst.enable {
+  config = mkIf libx.cfg.dunst.enable {
     services.dunst = {
       enable = true;
-      settings = with config.dotx.theme.base16.withHashtag; {
+      settings = with libx.cfg.theme.base16.withHashtag; {
         global = {
           separator_color = base02;
-          font = with config.dotx.theme.font; "${sansserif.name} ${toString size.gui}";
+          font = with libx.cfg.theme.font; "${sansserif.name} ${toString size.gui}";
           mouse_left_click = "do_action, close_current";
         };
 

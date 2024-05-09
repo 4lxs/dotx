@@ -6,12 +6,10 @@ _inputs: {
 with lib; let
   libx = config.lib.dotx;
 in {
-  options.dotx.mako = libx.mkTargetOption "mako notification daemon";
-
-  config = mkIf config.dotx.mako.enable {
+  config = mkIf libx.cfg.mako.enable {
     services.mako = {
       enable = true;
-      font = with config.dotx.theme.font; sansserif.name + " " + (toString size.gui);
+      font = with libx.cfg.theme.font; sansserif.name + " " + (toString size.gui);
       padding = "15";
       defaultTimeout = 5000;
       borderSize = 2;

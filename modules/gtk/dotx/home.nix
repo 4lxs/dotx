@@ -7,16 +7,14 @@ _inputs: {
 with lib; let
   libx = config.lib.dotx;
 in {
-  options.dotx.gtk = libx.mkTargetOption "gtk theming";
-
-  config = mkIf config.dotx.gtk.enable {
+  config = mkIf libx.cfg.gtk.enable {
     gtk = {
       enable = true;
-      # inherit (config.dotx.theme) font;
+      # inherit (libx.cfg.theme) font;
       theme = {
         package = pkgs.adw-gtk3;
         name =
-          if config.dotx.theme.darkTheme
+          if libx.cfg.theme.darkTheme
           then "adw-gtk3-dark"
           else "adw-gtk3";
       };
@@ -27,7 +25,7 @@ in {
     };
     dconf.settings."org/gnome/desktop/interface" = {
       color-scheme =
-        if config.dotx.theme.darkTheme
+        if libx.cfg.theme.darkTheme
         then "prefer-dark"
         else "prefer-light";
     };

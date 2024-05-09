@@ -6,9 +6,7 @@ _inputs: {
 with lib; let
   libx = config.lib.dotx;
 in {
-  options.dotx.fish = libx.mkTargetOption "fish shell";
-
-  config = mkIf config.dotx.fish.enable {
+  config = mkIf libx.cfg.fish.enable {
     programs.fish = {
       enable = true;
     };

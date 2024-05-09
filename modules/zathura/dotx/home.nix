@@ -6,12 +6,10 @@ _inputs: {
 with lib; let
   libx = config.lib.dotx;
 in {
-  options.dotx.zathura = libx.mkTargetOption "zathura document viewer";
-
-  config = mkIf config.dotx.zathura.enable {
+  config = mkIf libx.cfg.zathura.enable {
     programs.zathura = {
       enable = true;
-      options = with config.dotx.theme.base16.withHashtag; {
+      options = with libx.cfg.theme.base16.withHashtag; {
         # adjust-open = "best-fit";
         # pages-per-row = 1;
 

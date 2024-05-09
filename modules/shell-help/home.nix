@@ -6,16 +6,8 @@ _inputs: {
 with lib; let
   libx = config.lib.dotx;
 in {
-  options.dotx.shell-help =
-    libx.mkTargetOption "helpful shell aliases"
-    // {
-      git = libx.mkBoolOption config.dotx.shell-help.enable ''
-        helpful git aliases
-      '';
-    };
-
   config.home.shellAliases = mkMerge [
-    (mkIf config.dotx.shell-help.enable {
+    (mkIf libx.cfg.shell-help.enable {
       # TODO: doesn't work in fish
       # vi = "\${EDITOR:-nvim}";
       # vim = "\${EDITOR:-nvim}";
@@ -44,7 +36,7 @@ in {
       # apt = "man nix-env";
       # apt-get = "man nix-env";
     })
-    (mkIf config.dotx.shell-help.git {
+    (mkIf libx.cfg.shell-help.git {
       g = "git";
       ga = "git add";
       gs = "git status";
