@@ -18,7 +18,7 @@ in
             serif = sansserif; # not used currently anyways
             monospace = mkDefault {
               name = "FiraCode Nerd Font Mono";
-              package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
+              package = pkgs.nerdfonts.override {fonts = ["FiraMono"];};
             };
             emoji = mkDefault {
               name = "Noto Color Emoji";
@@ -46,7 +46,7 @@ in
         };
         kitty.enable = true;
         alacritty.enable = true;
-        ags.enable = true;
+        ags.end4.enable = true;
         fish.enable = true;
         rofi.enable = true;
         kde.enable = true;

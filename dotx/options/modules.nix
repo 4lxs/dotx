@@ -3,9 +3,15 @@
 in
   with libx.options; {
     options.dotx = {
-      ags = mkTarget ''
-        ags widgets from [aylur's dotfiles](https://github.com/Aylur/dotfiles/tree/main)
-      '';
+      ags = {
+        aylur = mkTarget ''
+          ags widgets from [aylur's dotfiles](https://github.com/Aylur/dotfiles)
+        '';
+
+        end4 = mkTarget ''
+          ags widgets from [end4/dots-hyprland](https://github.com/end-4/dots-hyprland)
+        '';
+      };
 
       zathura = mkTarget "zathura document viewer";
 

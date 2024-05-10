@@ -1,6 +1,4 @@
 {
-  astal,
-  ags,
   matugen,
   aylur,
   ...
@@ -13,12 +11,7 @@
 with lib; let
   libx = config.lib.dotx;
 in {
-  imports = [
-    astal.homeManagerModules.default
-    ags.homeManagerModules.default
-  ];
-
-  config = mkIf libx.cfg.ags.enable {
+  config = mkIf libx.cfg.ags.aylur.enable {
     programs.astal = {
       enable = true;
       extraPackages = with pkgs; [libadwaita];

@@ -27,6 +27,7 @@
           home-manager.sharedModules = [
             (flake-parts.lib.importApply ./lib inputs)
             ((import ./dotx/importModules.nix false inputs) "home")
+            (import ./dotx/homeImports.nix inputs)
           ];
         };
         homeManagerModules.dotx = {
@@ -49,11 +50,6 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     devshell = {
       url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -67,6 +63,10 @@
     matugen.url = "github:InioX/matugen";
     astal.url = "github:Aylur/astal";
     aylur.url = "github:Aylur/dotfiles";
+    end4 = {
+      url = "github:end-4/dots-hyprland";
+      flake = false;
+    };
 
     base16.url = "github:SenchoPens/base16.nix";
     base16-kitty = {
