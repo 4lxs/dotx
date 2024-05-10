@@ -1,3 +1,7 @@
-{pkgs, ...}: {
-  rofi-blocks = pkgs.callPackage ./rofi-blocks.nix {};
+{
+  perSystem = {pkgs, ...}: {
+    packages = {
+      materialyoucolor-python = pkgs.callPackage ./materialyoucolor-python.nix {};
+    };
+  };
 }
