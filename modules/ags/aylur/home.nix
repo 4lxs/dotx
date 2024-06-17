@@ -1,44 +1,28 @@
 {
-  matugen,
+  self,
   aylur,
+  matugen,
   ...
 }: {
   config,
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   libx = config.lib.dotx;
+  inherit (self.packages.${pkgs.system}) asztal;
 in {
-  config = mkIf libx.cfg.ags.aylur.enable {
+  config = lib.mkIf libx.cfg.ags.aylur.enable {
+    home.packages = [asztal];
     programs.astal = {
       enable = true;
-      extraPackages = with pkgs; [libadwaita];
+      extraPackages = [pkgs.libadwaita];
     };
 
     programs.ags = {
       enable = true;
       configDir = aylur + "/ags";
-      extraPackages = with pkgs; [accountsservice];
+      extraPackages = [pkgs.accountsservice];
     };
-
-    home.packages = with pkgs; [
-      bun
-      dart-sass
-      fd
-      brightnessctl
-      swww
-      matugen.packages.${system}.default
-      slurp
-      wf-recorder
-      wl-clipboard
-      wayshot
-      swappy
-      hyprpicker
-      pavucontrol
-      networkmanager
-      gtk3
-    ];
   };
 }

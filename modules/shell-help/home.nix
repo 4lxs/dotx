@@ -18,10 +18,11 @@ in {
       emacs = "man nvim";
 
       # TODO: check if tool exists e.g. [ -x "$(command -v exa)" ]
-      ls = "exa -al --color=always --group-directories-first";
-      entar = "tar -acf ";
-      untar = "tar -zxvf ";
-      wget = "wget -c ";
+      ls = "eza -al --color=always --group-directories-first";
+      tree = "eza --tree";
+      entar = "tar -acf";
+      untar = "tar -zxvf";
+      wget = "wget -c";
       grep = "grep --color=auto";
       cat = "bat";
       # TODO: extract

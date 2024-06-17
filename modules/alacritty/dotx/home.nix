@@ -9,7 +9,7 @@ with lib; let
   noTmuxEntry = pkgs.makeDesktopItem {
     name = "alacritty";
     desktopName = "Alacritty (no tmux)";
-    exec = "alacritty -e zsh";
+    exec = "alacritty -e fish";
     icon = "Alacritty";
     terminal = false;
   };

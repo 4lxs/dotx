@@ -1,10 +1,8 @@
 {
-  lib,
   config,
   options,
   ...
-}:
-with lib; let
+}: let
   libx = config.lib.dotx;
   configs = builtins.attrNames options.dotx.configs;
 in {
@@ -13,7 +11,29 @@ in {
     ./modules.nix
   ];
 
-  options.dotx = {
-    config = mkOption {type = types.enum (configs ++ ["clean"]);};
+  options.dotx = let
+    inherit (libx.options) mkStr mkEnum;
+  in {
+    config = mkEnum (configs ++ ["clean"]) ''
+      The configuration to use
+    '';
+
+    editor = mkStr ''
+      command to execute the editor.
+      should probably be a nix store path
+    '';
+
+    launcher = mkStr ''
+      command to toggle the launcher
+    '';
+
+    user = {
+      name = mkStr ''
+        name for profiles. (user, git, firefox, ...)
+      '';
+      email = mkStr ''
+        email for profiles. (git, ...)
+      '';
+    };
   };
 }

@@ -24,9 +24,14 @@ in
           '';
         };
 
-      configs.dotx = mkConfig "dotx" ''
-        the default dotx configuration
-      '';
+      configs = {
+        dotx = mkConfig "dotx" ''
+          the default dotx configuration
+        '';
+        end4 = mkConfig "end4" ''
+          [end4/dots-hyprland](https://github.com/end-4/dots-hyprland) configuration
+        '';
+      };
 
       dunst = mkTarget "dunst notification daemon";
 
@@ -68,5 +73,15 @@ in
         };
 
       waybar = mkTarget "waybar";
+
+      git =
+        mkTarget "git"
+        // {
+          aliases = mkDisable ''
+            dotx git aliases
+          '';
+        };
+
+      lazygit = mkTarget "lazygit";
     };
   }

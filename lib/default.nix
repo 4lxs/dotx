@@ -12,6 +12,17 @@ with lib; {
           type = types.bool;
           inherit default description;
         };
+      mkStr = description:
+        mkOption {
+          type = types.str;
+          inherit description;
+        };
+      mkEnum = values: description:
+        mkOption {
+          type = types.enum values;
+          inherit description;
+        };
+
       mkEnable = mkBool false;
       mkDisable = mkBool true;
       mkTargetDef = default: description: {enable = mkBool default description;};

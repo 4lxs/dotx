@@ -10,7 +10,7 @@ in {
   config = mkIf libx.cfg.gtk.enable {
     gtk = {
       enable = true;
-      # inherit (libx.cfg.theme) font;
+      font = libx.cfg.theme.font.sansserif;
       theme = {
         package = pkgs.adw-gtk3;
         name =
@@ -18,10 +18,22 @@ in {
           then "adw-gtk3-dark"
           else "adw-gtk3";
       };
-      # iconTheme = {
-      #   package = pkgs.gnome.adwaita-icon-theme;
-      #   name = "adwaita-icon-theme";
-      # };
+      iconTheme = {
+        name = "MoreWaita";
+        package = pkgs.morewaita-icon-theme;
+      };
+    };
+    home = {
+      pointerCursor = {
+        name = "Qogir";
+        size = 24;
+        package = pkgs.qogir-icon-theme;
+        gtk.enable = true;
+      };
+      sessionVariables = {
+        XCURSOR_THEME = "Qogir";
+        XCURSOR_SIZE = "24";
+      };
     };
     dconf.settings."org/gnome/desktop/interface" = {
       color-scheme =

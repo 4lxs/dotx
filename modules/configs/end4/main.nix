@@ -7,8 +7,17 @@ _inputs: {
   libx = config.lib.dotx;
 in
   with lib; {
-    config = mkIf libx.cfg.configs.dotx.enable {
+    config = mkIf libx.cfg.configs.end4.enable {
       dotx = {
+        ags.end4.enable = true;
+
+        # not part of end4, but makes things better
+        gtk.enable = true;
+        kde.enable = true;
+        fontconfig.enable = true;
+
+        # FIXME: placeholders
+
         editor = "nvim";
 
         theme = {
@@ -38,25 +47,6 @@ in
           transparency = 0.95;
           wallpaper = ./wallpaper.jpg;
         };
-
-        git.enable = true;
-        zathura.enable = true;
-        fontconfig.enable = true;
-        hyprland.enable = true;
-        tmux = {
-          enable = true;
-          makeTerminalDefault = true;
-        };
-        kitty.enable = true;
-        alacritty.enable = true;
-        ags.aylur.enable = true;
-        fish.enable = true;
-        rofi.enable = true;
-        kde.enable = true;
-        gtk.enable = true;
-        starship.enable = true;
-        shell-help.enable = true;
-        kdeconnect.enable = true;
       };
     };
   }

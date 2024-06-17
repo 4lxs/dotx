@@ -56,13 +56,12 @@
     };
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprlock.url = "github:hyprwm/hyprlock";
-    hyprlock.inputs.nixpkgs.follows = "nixpkgs";
     ags.url = "github:Aylur/ags";
     matugen.url = "github:InioX/matugen";
     astal.url = "github:Aylur/astal";
     aylur.url = "github:Aylur/dotfiles";
+    anyrun.url = "github:Kirottu/anyrun";
+    anyrun.inputs.nixpkgs.follows = "nixpkgs";
     end4 = {
       url = "github:end-4/dots-hyprland";
       flake = false;
